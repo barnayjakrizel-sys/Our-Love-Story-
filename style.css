@@ -1,14 +1,68 @@
+/* =========================================
+   Fairytale Romantic Proposal
+   ========================================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:'Poppins',sans-serif;
-    background:#000;
-    overflow:hidden;
+    background:#08101f;
+    color:#fff;
+    overflow-x:hidden;
 }
+
+/* ================================
+   Floating Background
+================================ */
+
+#stars,
+#hearts{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:1;
+}
+
+.star,
+.heart{
+    position:absolute;
+    animation:float linear infinite;
+    opacity:.8;
+}
+
+.star{
+    color:#fff8c6;
+    text-shadow:0 0 10px white;
+}
+
+.heart{
+    color:#ff5a92;
+}
+
+@keyframes float{
+
+    from{
+        transform:translateY(100vh);
+    }
+
+    to{
+        transform:translateY(-120vh);
+    }
+
+}
+
+/* ================================
+   Hero
+================================ */
 
 .hero{
     position:relative;
@@ -17,261 +71,634 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    text-align:center;
+    overflow:hidden;
 }
 
-.bg{
+.hero-bg{
     position:absolute;
     width:100%;
     height:100%;
     object-fit:cover;
-    filter:brightness(.35);
+    z-index:0;
 }
 
 .overlay{
     position:absolute;
     inset:0;
-    background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.75));
+    background:linear-gradient(
+        rgba(5,5,20,.35),
+        rgba(5,5,20,.70)
+    );
+    z-index:1;
 }
 
-.content{
+.hero-content{
     position:relative;
     z-index:2;
-    max-width:700px;
-    text-align:center;
-    color:#fff;
+    max-width:800px;
     padding:20px;
-    animation:fadeIn 2s ease;
 }
 
-.content h3{
-    font-family:'Great Vibes',cursive;
-    font-size:60px;
-    color:#ffd6e8;
+.hero h2{
+    font-family:'Cinzel',serif;
+    font-size:30px;
+    color:#ffe6a7;
     margin-bottom:15px;
 }
 
-.content h1{
-    font-size:55px;
-    margin-bottom:25px;
-}
-
-.content p{
-    line-height:1.8;
-    font-size:19px;
-    margin-bottom:40px;
-}
-
-button{
-    border:none;
-    cursor:pointer;
-    padding:18px 40px;
-    border-radius:50px;
-    font-size:18px;
-    font-weight:600;
-    transition:.3s;
-}
-
-#proposalBtn,
-#yesBtn{
-    background:#ff4d8d;
-    color:white;
-}
-
-#proposalBtn:hover,
-#yesBtn:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 25px rgba(255,105,180,.6);
-}
-
-.modal{
-    position:fixed;
-    inset:0;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    background:rgba(0,0,0,.75);
-    z-index:999;
-}
-
-.modal-content{
-    width:90%;
-    max-width:600px;
-    background:white;
-    border-radius:20px;
-    padding:40px;
-    text-align:center;
-    color:#333;
-    animation:zoom .4s ease;
-}
-
-.modal-content h2{
-    font-family:'Great Vibes',cursive;
-    color:#ff4d8d;
-    font-size:50px;
-}
-
-.modal-content h1{
-    margin:20px 0;
-    font-size:45px;
-}
-
-.modal-content p{
-    margin-bottom:30px;
-    line-height:1.8;
-}
-
-.success{
-    position:fixed;
-    inset:0;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    background:#ff4d8d;
-    color:white;
-    text-align:center;
-    padding:30px;
-    z-index:1000;
-}
-
-.success h1{
-    font-size:55px;
+.hero h1{
+    font-family:'Cinzel',serif;
+    font-size:70px;
+    line-height:1.2;
     margin-bottom:20px;
 }
 
-.success p{
-    font-size:22px;
+.hero h1 span{
+    color:#ff4d8d;
+}
+
+.hero p{
+    font-size:20px;
     line-height:1.8;
+    margin-bottom:35px;
 }
 
-.hearts::before,
-.hearts::after{
-    content:"❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️";
-    position:absolute;
-    width:100%;
+/* ================================
+   Button
+================================ */
+
+.btn,
+.proposal-btn,
+#wiggleBtn,
+#yesBtn,
+#noBtn{
+
+    display:inline-block;
+
+    padding:15px 35px;
+
+    border:none;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+    transition:.35s;
+
+    background:linear-gradient(
+        45deg,
+        #ff5fa8,
+        #ff9bcb
+    );
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    box-shadow:0 10px 25px rgba(255,105,180,.35);
+
+}
+
+.btn:hover,
+.proposal-btn:hover,
+#wiggleBtn:hover,
+#yesBtn:hover,
+#noBtn:hover{
+
+    transform:translateY(-5px) scale(1.05);
+
+}
+
+/* ================================
+   Sections
+================================ */
+
+.section{
+
+    position:relative;
+
+    z-index:2;
+
+    padding:90px 10%;
+
+}
+
+.section-title{
+
     text-align:center;
-    font-size:30px;
-    animation:float 10s linear infinite;
-    opacity:.4;
+
+    font-family:'Cinzel',serif;
+
+    font-size:45px;
+
+    margin-bottom:70px;
+
+    color:#ffe9bd;
+
 }
 
-.hearts::after{
-    animation-delay:5s;
+/* ================================
+   Timeline
+================================ */
+
+.timeline{
+
+    position:relative;
+
+    max-width:1000px;
+
+    margin:auto;
+
 }
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-    to{
-        opacity:1;
+.timeline::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    width:4px;
+
+    top:0;
+
+    bottom:0;
+
+    margin-left:-2px;
+
+    background:#ffd27c;
+
+}
+
+.timeline-item{
+
+    position:relative;
+
+    width:50%;
+
+    padding:20px 40px;
+
+}
+
+.timeline-item.left{
+
+    left:0;
+
+}
+
+.timeline-item.right{
+
+    left:50%;
+
+}
+
+.timeline-content{
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    transition:.3s;
+
+}
+
+.timeline-content:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.timeline-content h3{
+
+    color:#ffd88f;
+
+    margin-bottom:10px;
+
+}
+
+.timeline-content h4{
+
+    color:#ff9ec6;
+
+    margin-bottom:15px;
+
+}
+
+/* ================================
+   Gallery
+================================ */
+
+.gallery{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:35px;
+
+}
+
+.gallery-card{
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+}
+
+.gallery-card img{
+
+    width:100%;
+
+    display:block;
+
+    transition:.6s;
+
+}
+
+.gallery-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+/* ================================
+   Wiggle
+================================ */
+
+.wiggle-box{
+
+    max-width:750px;
+
+    margin:auto;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:25px;
+
+    padding:50px;
+
+    backdrop-filter:blur(10px);
+
+}
+
+.music-note{
+
+    font-size:60px;
+
+    margin-bottom:20px;
+
+    animation:bounce 2s infinite;
+
+}
+
+@keyframes bounce{
+
+    0%,100%{
+
         transform:translateY(0);
+
     }
-}
 
-@keyframes zoom{
-    from{
-        transform:scale(.7);
-        opacity:0;
+    50%{
+
+        transform:translateY(-15px);
+
     }
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
+
 }
 
-@keyframes float{
-    from{
-        transform:translateY(100vh);
-    }
-    to{
-        transform:translateY(-120vh);
-    }
+.wiggle-box p{
+
+    line-height:2;
+
+    margin-bottom:30px;
+
 }
 
-@media(max-width:768px){
+/* ================================
+   Quote
+================================ */
 
-.content h3{
-    font-size:40px;
-}
+.quote-box{
 
-.content h1{
-    font-size:34px;
-}
+    max-width:700px;
 
-.content p{
-    font-size:16px;
-}
+    margin:auto;
 
-.modal-content h1{
+    text-align:center;
+
     font-size:30px;
+
+    font-family:'Cinzel',serif;
+
+    color:#ffe7a9;
+
+}
+
+/* ================================
+   Final
+================================ */
+
+.final-section{
+
+    text-align:center;
+
+}
+
+.final-section h2{
+
+    font-size:50px;
+
+    margin-bottom:20px;
+
+    font-family:'Cinzel',serif;
+
+}
+
+.final-section p{
+
+    font-size:20px;
+
+    margin-bottom:40px;
+
+}
+
+/* ================================
+   Popup
+================================ */
+
+.popup{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.75);
+
+    z-index:999;
+
+}
+
+.popup-content{
+
+    width:90%;
+
+    max-width:650px;
+
+    background:white;
+
+    color:#333;
+
+    border-radius:25px;
+
+    padding:45px;
+
+    text-align:center;
+
+    position:relative;
+
+    animation:popup .45s ease;
+
+}
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.7);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+.popup h2{
+
+    color:#ff4d8d;
+
+    margin-bottom:25px;
+
+}
+
+.popup h1{
+
+    color:#ff2d73;
+
+    margin:35px 0;
+
+}
+
+.popup p{
+
+    line-height:1.9;
+
+    margin-bottom:18px;
+
+}
+
+.popup-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.close{
+
+    position:absolute;
+
+    right:20px;
+
+    top:10px;
+
+    font-size:35px;
+
+    cursor:pointer;
+
+}
+
+/* ================================
+   Success
+================================ */
+
+.success{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.85);
+
+    z-index:1200;
+
+}
+
+.success-box{
+
+    background:white;
+
+    color:#333;
+
+    padding:55px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    max-width:500px;
+
+    width:90%;
+
 }
 
 .success h1{
-    font-size:34px;
+
+    color:#ff4d8d;
+
+    margin-bottom:25px;
+
 }
 
 .success p{
-    font-size:18px;
-}
 
-button{
-    width:100%;
-.gallery{
-    background:#111;
-    color:white;
-    text-align:center;
-    padding:80px 20px;
-}
-
-.gallery h2{
-    color:#ff8fb8;
-    font-size:38px;
-    margin-bottom:15px;
-}
-
-.gallery p{
-    max-width:700px;
-    margin:0 auto 40px;
-    line-height:1.8;
-}
-
-.gallery-grid{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.gallery-grid img{
-    width:300px;
-    max-width:90%;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(255,105,180,.35);
-    transition:.3s;
-
-    .wiggle{
-    background:#1b1b1b;
-    color:white;
-    text-align:center;
-    padding:90px 25px;
-}
-
-.wiggle h2{
-    font-size:42px;
-    color:#ff8fb8;
-    margin-bottom:25px;
-}
-
-.wiggle p{
-    max-width:800px;
-    margin:auto;
     line-height:2;
-    font-size:20px;
-}
+
 }
 
-.gallery-grid img:hover{
-    transform:scale(1.05);
+/* ================================
+   Confetti
+================================ */
+
+#confetti{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:1500;
+
+}
+
+/* ================================
+   Mobile
+================================ */
+
+@media(max-width:768px){
+
+.hero h1{
+
+    font-size:42px;
+
+}
+
+.hero h2{
+
+    font-size:24px;
+
+}
+
+.hero p{
+
+    font-size:16px;
+
+}
+
+.section-title{
+
+    font-size:34px;
+
+}
+
+.timeline::after{
+
+    left:20px;
+
+}
+
+.timeline-item{
+
+    width:100%;
+
+    padding-left:55px;
+
+    padding-right:15px;
+
+}
+
+.timeline-item.left,
+.timeline-item.right{
+
+    left:0;
+
+}
+
+.quote-box{
+
+    font-size:22px;
+
+}
+
+.final-section h2{
+
+    font-size:34px;
+
+}
+
+.popup-content{
+
+    padding:30px;
+
+}
+
+.popup-buttons{
+
+    flex-direction:column;
+
+}
+
 }
