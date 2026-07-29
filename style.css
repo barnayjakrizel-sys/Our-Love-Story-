@@ -218,6 +218,40 @@ button{
 
 button{
     width:100%;
+.gallery{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:80px 20px;
 }
 
+.gallery h2{
+    color:#ff8fb8;
+    font-size:38px;
+    margin-bottom:15px;
+}
+
+.gallery p{
+    max-width:700px;
+    margin:0 auto 40px;
+    line-height:1.8;
+}
+
+.gallery-grid{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.gallery-grid img{
+    width:300px;
+    max-width:90%;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(255,105,180,.35);
+    transition:.3s;
+}
+
+.gallery-grid img:hover{
+    transform:scale(1.05);
 }
