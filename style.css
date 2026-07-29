@@ -250,6 +250,26 @@ button{
     border-radius:20px;
     box-shadow:0 10px 25px rgba(255,105,180,.35);
     transition:.3s;
+
+    .wiggle{
+    background:#1b1b1b;
+    color:white;
+    text-align:center;
+    padding:90px 25px;
+}
+
+.wiggle h2{
+    font-size:42px;
+    color:#ff8fb8;
+    margin-bottom:25px;
+}
+
+.wiggle p{
+    max-width:800px;
+    margin:auto;
+    line-height:2;
+    font-size:20px;
+}
 }
 
 .gallery-grid img:hover{
