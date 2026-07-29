@@ -698,7 +698,45 @@ body{
 .popup-buttons{
 
     flex-direction:column;
+/* ================================
+   Music Button
+================================ */
 
+.music-btn{
+
+    position:fixed;
+
+    bottom:20px;
+
+    right:20px;
+
+    z-index:9999;
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:linear-gradient(45deg,#ff5fa8,#ff9bcb);
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.3);
+
+    transition:.3s;
+
+}
+
+.music-btn:hover{
+
+    transform:scale(1.08);
+
+}
 }
 
 }
