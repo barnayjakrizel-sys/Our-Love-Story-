@@ -1,103 +1,704 @@
-const proposalBtn = document.getElementById("proposalBtn");
-const proposalModal = document.getElementById("proposalModal");
-const yesBtn = document.getElementById("yesBtn");
-const success = document.getElementById("success");
+/* =========================================
+   Fairytale Romantic Proposal
+   ========================================= */
 
-proposalBtn.addEventListener("click", () => {
-    proposalModal.style.display = "flex";
-});
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-yesBtn.addEventListener("click", () => {
-    proposalModal.style.display = "none";
-    success.style.display = "flex";
+html{
+    scroll-behavior:smooth;
+}
 
-    createHearts();
+body{
+    font-family:'Poppins',sans-serif;
+    background:#08101f;
+    color:#fff;
+    overflow-x:hidden;
+}
 
-    launchConfetti();
-});
+/* ================================
+   Floating Background
+================================ */
 
-function createHearts(){
+#stars,
+#hearts{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:1;
+}
 
-    for(let i = 0; i < 40; i++){
+.star,
+.heart{
+    position:absolute;
+    animation:float linear infinite;
+    opacity:.8;
+}
 
-        const heart = document.createElement("div");
+.star{
+    color:#fff8c6;
+    text-shadow:0 0 10px white;
+}
 
-        heart.innerHTML = "❤️";
+.heart{
+    color:#ff5a92;
+}
 
-        heart.style.position = "fixed";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.top = "100vh";
-        heart.style.fontSize = (20 + Math.random() * 25) + "px";
-        heart.style.zIndex = "9999";
-        heart.style.transition = "transform 4s linear, opacity 4s";
+@keyframes float{
 
-        document.body.appendChild(heart);
+    from{
+        transform:translateY(100vh);
+    }
 
-        setTimeout(() => {
+    to{
+        transform:translateY(-120vh);
+    }
 
-            heart.style.transform = `translateY(-120vh) rotate(${Math.random()*360}deg)`;
-            heart.style.opacity = "0";
+}
 
-        },100);
+/* ================================
+   Hero
+================================ */
 
-        setTimeout(() => {
+.hero{
+    position:relative;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    overflow:hidden;
+}
 
-            heart.remove();
+.hero-bg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+}
 
-        },4200);
+.overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        rgba(5,5,20,.35),
+        rgba(5,5,20,.70)
+    );
+    z-index:1;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:800px;
+    padding:20px;
+}
+
+.hero h2{
+    font-family:'Cinzel',serif;
+    font-size:30px;
+    color:#ffe6a7;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-family:'Cinzel',serif;
+    font-size:70px;
+    line-height:1.2;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#ff4d8d;
+}
+
+.hero p{
+    font-size:20px;
+    line-height:1.8;
+    margin-bottom:35px;
+}
+
+/* ================================
+   Button
+================================ */
+
+.btn,
+.proposal-btn,
+#wiggleBtn,
+#yesBtn,
+#noBtn{
+
+    display:inline-block;
+
+    padding:15px 35px;
+
+    border:none;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+    transition:.35s;
+
+    background:linear-gradient(
+        45deg,
+        #ff5fa8,
+        #ff9bcb
+    );
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    box-shadow:0 10px 25px rgba(255,105,180,.35);
+
+}
+
+.btn:hover,
+.proposal-btn:hover,
+#wiggleBtn:hover,
+#yesBtn:hover,
+#noBtn:hover{
+
+    transform:translateY(-5px) scale(1.05);
+
+}
+
+/* ================================
+   Sections
+================================ */
+
+.section{
+
+    position:relative;
+
+    z-index:2;
+
+    padding:90px 10%;
+
+}
+
+.section-title{
+
+    text-align:center;
+
+    font-family:'Cinzel',serif;
+
+    font-size:45px;
+
+    margin-bottom:70px;
+
+    color:#ffe9bd;
+
+}
+
+/* ================================
+   Timeline
+================================ */
+
+.timeline{
+
+    position:relative;
+
+    max-width:1000px;
+
+    margin:auto;
+
+}
+
+.timeline::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    width:4px;
+
+    top:0;
+
+    bottom:0;
+
+    margin-left:-2px;
+
+    background:#ffd27c;
+
+}
+
+.timeline-item{
+
+    position:relative;
+
+    width:50%;
+
+    padding:20px 40px;
+
+}
+
+.timeline-item.left{
+
+    left:0;
+
+}
+
+.timeline-item.right{
+
+    left:50%;
+
+}
+
+.timeline-content{
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    transition:.3s;
+
+}
+
+.timeline-content:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.timeline-content h3{
+
+    color:#ffd88f;
+
+    margin-bottom:10px;
+
+}
+
+.timeline-content h4{
+
+    color:#ff9ec6;
+
+    margin-bottom:15px;
+
+}
+
+/* ================================
+   Gallery
+================================ */
+
+.gallery{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:35px;
+
+}
+
+.gallery-card{
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+}
+
+.gallery-card img{
+
+    width:100%;
+
+    display:block;
+
+    transition:.6s;
+
+}
+
+.gallery-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+/* ================================
+   Wiggle
+================================ */
+
+.wiggle-box{
+
+    max-width:750px;
+
+    margin:auto;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:25px;
+
+    padding:50px;
+
+    backdrop-filter:blur(10px);
+
+}
+
+.music-note{
+
+    font-size:60px;
+
+    margin-bottom:20px;
+
+    animation:bounce 2s infinite;
+
+}
+
+@keyframes bounce{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-15px);
 
     }
 
 }
 
-function launchConfetti(){
+.wiggle-box p{
 
-    const colors = [
-        "#ff4d8d",
-        "#ffd166",
-        "#ffffff",
-        "#ff9ecb",
-        "#ff6fa5"
-    ];
+    line-height:2;
 
-    for(let i=0;i<120;i++){
+    margin-bottom:30px;
 
-        const piece = document.createElement("div");
+}
 
-        piece.style.position="fixed";
-        piece.style.left=Math.random()*100+"vw";
-        piece.style.top="-20px";
-        piece.style.width="10px";
-        piece.style.height="10px";
-        piece.style.background=colors[Math.floor(Math.random()*colors.length)];
-        piece.style.opacity="1";
-        piece.style.zIndex="9998";
-        piece.style.borderRadius=Math.random()>0.5?"50%":"2px";
+/* ================================
+   Quote
+================================ */
 
-        document.body.appendChild(piece);
+.quote-box{
 
-        const duration=3000+Math.random()*2000;
-        const x=(Math.random()-0.5)*400;
-        const y=window.innerHeight+100;
+    max-width:700px;
 
-        piece.animate([
-            {
-                transform:"translate(0,0) rotate(0deg)",
-                opacity:1
-            },
-            {
-                transform:`translate(${x}px,${y}px) rotate(${720*Math.random()}deg)`,
-                opacity:0
-            }
-        ],{
-            duration:duration,
-            easing:"ease-out"
-        });
+    margin:auto;
 
-        setTimeout(()=>{
-            piece.remove();
-        },duration);
+    text-align:center;
+
+    font-size:30px;
+
+    font-family:'Cinzel',serif;
+
+    color:#ffe7a9;
+
+}
+
+/* ================================
+   Final
+================================ */
+
+.final-section{
+
+    text-align:center;
+
+}
+
+.final-section h2{
+
+    font-size:50px;
+
+    margin-bottom:20px;
+
+    font-family:'Cinzel',serif;
+
+}
+
+.final-section p{
+
+    font-size:20px;
+
+    margin-bottom:40px;
+
+}
+
+/* ================================
+   Popup
+================================ */
+
+.popup{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.75);
+
+    z-index:999;
+
+}
+
+.popup-content{
+
+    width:90%;
+
+    max-width:650px;
+
+    background:white;
+
+    color:#333;
+
+    border-radius:25px;
+
+    padding:45px;
+
+    text-align:center;
+
+    position:relative;
+
+    animation:popup .45s ease;
+
+}
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.7);
 
     }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+.popup h2{
+
+    color:#ff4d8d;
+
+    margin-bottom:25px;
+
+}
+
+.popup h1{
+
+    color:#ff2d73;
+
+    margin:35px 0;
+
+}
+
+.popup p{
+
+    line-height:1.9;
+
+    margin-bottom:18px;
+
+}
+
+.popup-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.close{
+
+    position:absolute;
+
+    right:20px;
+
+    top:10px;
+
+    font-size:35px;
+
+    cursor:pointer;
+
+}
+
+/* ================================
+   Success
+================================ */
+
+.success{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.85);
+
+    z-index:1200;
+
+}
+
+.success-box{
+
+    background:white;
+
+    color:#333;
+
+    padding:55px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    max-width:500px;
+
+    width:90%;
+
+}
+
+.success h1{
+
+    color:#ff4d8d;
+
+    margin-bottom:25px;
+
+}
+
+.success p{
+
+    line-height:2;
+
+}
+
+/* ================================
+   Confetti
+================================ */
+
+#confetti{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:1500;
+
+}
+
+/* ================================
+   Mobile
+================================ */
+
+@media(max-width:768px){
+
+.hero h1{
+
+    font-size:42px;
+
+}
+
+.hero h2{
+
+    font-size:24px;
+
+}
+
+.hero p{
+
+    font-size:16px;
+
+}
+
+.section-title{
+
+    font-size:34px;
+
+}
+
+.timeline::after{
+
+    left:20px;
+
+}
+
+.timeline-item{
+
+    width:100%;
+
+    padding-left:55px;
+
+    padding-right:15px;
+
+}
+
+.timeline-item.left,
+.timeline-item.right{
+
+    left:0;
+
+}
+
+.quote-box{
+
+    font-size:22px;
+
+}
+
+.final-section h2{
+
+    font-size:34px;
+
+}
+
+.popup-content{
+
+    padding:30px;
+
+}
+
+.popup-buttons{
+
+    flex-direction:column;
+
+}
 
 }
